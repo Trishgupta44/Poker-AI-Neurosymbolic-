@@ -205,7 +205,7 @@ export function GameScreen() {
         </div>
 
         {/* AI Advisor Panel (sidebar) */}
-        <div className="w-72 flex-shrink-0 overflow-y-auto">
+        <div className="w-[25%] flex-shrink-0 overflow-y-auto  text-2xl">
           <AIAdvisorPanel visible={!!showAIPanel} />
         </div>
       </div>

@@ -9,8 +9,8 @@ export function ConfidenceCard({ confidence }: ConfidenceCardProps) {
 
   if (!dataSufficient) {
     return (
-      <div className="bg-noir-elevated border border-noir-border rounded-md p-3">
-        <div className="flex items-center gap-2 mb-1">
+      <div className="bg-noir-elevated border border-noir-border  rounded-md p-2">
+        <div className="flex items-center  mb-1">
           <span className="text-text-muted text-xs">&#9203;</span>
           <span className="font-[Cinzel] text-xs text-text-muted">{opponentName}</span>
         </div>
@@ -123,27 +123,27 @@ export function ConfidenceCard({ confidence }: ConfidenceCardProps) {
 
       {/* Explanation */}
       {explanation && (
-        <p className="text-text-muted text-[10px] italic leading-relaxed mt-2 mb-1">
+        <p className="text-text-muted text-sm italic leading-relaxed mt-2 mb-1">
           {explanation}
         </p>
       )}
 
       {/* Feature Breakdown */}
       {featureBreakdown && Object.keys(featureBreakdown).length > 0 && (
-        <div className="space-y-1 border-t border-noir-border pt-2 mt-1">
+        <div className="space-y-1.5 border-t border-noir-border pt-2 mt-2">
           {Object.entries(featureBreakdown).map(([feature, info]) => (
-            <div key={feature} className="flex items-start gap-1.5">
-              <span className="text-[10px] mt-px">
+            <div key={feature} className="flex items-start gap-2">
+              <span className="text-sm mt-px">
                 {info.favoursBluff ? '\u26A0' : '\u2714'}
               </span>
               <div className="flex-1 min-w-0">
                 <span
-                  className="font-[DM_Mono] text-[9px] font-bold"
+                  className="font-[DM_Mono] text-sm font-bold"
                   style={{ color: info.favoursBluff ? '#F59E0B' : '#22C55E' }}
                 >
                   {feature}
                 </span>
-                <span className="text-text-muted text-[9px] ml-1">
+                <span className="text-text-muted text-xs ml-1">
                   {info.note}
                 </span>
               </div>

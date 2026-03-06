@@ -97,10 +97,14 @@ export function applyAction(
   switch (action) {
     case 'FOLD':
       player.isFolded = true;
+      player.lastAction = 'Fold';
+      player.lastActionTimestamp = Date.now();
       break;
 
     case 'CHECK':
       // No chips moved
+      player.lastAction = 'Check';
+      player.lastActionTimestamp = Date.now();
       break;
 
     case 'CALL': {
@@ -111,7 +115,11 @@ export function applyAction(
       updatedRound.pot += callAmount;
       if (player.chips === 0) {
         player.isAllIn = true;
+        player.lastAction = 'All In';
+      } else {
+        player.lastAction = 'Call';
       }
+      player.lastActionTimestamp = Date.now();
       break;
     }
 
@@ -131,7 +139,11 @@ export function applyAction(
 
       if (player.chips === 0) {
         player.isAllIn = true;
+        player.lastAction = 'All In';
+      } else {
+        player.lastAction = `Raise to $${raiseToAmount}`;
       }
+      player.lastActionTimestamp = Date.now();
 
       // Reset who has acted — everyone needs to act again after a raise
       updatedRound.playersActedThisStreet = new Set([playerId]);
@@ -159,6 +171,8 @@ export function applyAction(
       updatedRound.pot += allInAmount;
       player.chips = 0;
       player.isAllIn = true;
+      player.lastAction = 'All In';
+      player.lastActionTimestamp = Date.now();
       break;
     }
 
@@ -171,6 +185,9 @@ export function applyAction(
       if (player.chips === 0) {
         player.isAllIn = true;
       }
+      // Usually, we don't flash text for posting blinds, but we can store it
+      player.lastAction = blindAmount === round.minRaise ? 'Big Blind' : 'Small Blind';
+      player.lastActionTimestamp = Date.now();
       break;
     }
   }

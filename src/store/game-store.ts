@@ -67,10 +67,16 @@ export const useGameStore = create<GameStore>((set, get) => ({
       set({
         gameState: newState,
         isProcessingAction: false,
-        showRevealModal: isShowdown,
+        showRevealModal: false, // Delay showing the modal
         lastActionTimestamp: Date.now(),
         turnStartedAt: Date.now(),  // Next player's turn starts now
       });
+
+      if (isShowdown) {
+        setTimeout(() => {
+          get().setShowRevealModal(true);
+        }, 1000); // 1 second delay
+      }
     } catch (error) {
       console.error('Error processing action:', error);
       set({ isProcessingAction: false });

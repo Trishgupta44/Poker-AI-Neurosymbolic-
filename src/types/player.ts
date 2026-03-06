@@ -24,6 +24,8 @@ export interface Player {
   seatIndex: number;
   botPersonality: BotPersonality | null;
   hasAIAssistance: boolean;
+  lastAction?: string;        // Text representation of last action (e.g. "Call", "Raise to 50")
+  lastActionTimestamp?: number; // Used to trigger animation key changes in UI
 }
 
 export const BOT_PERSONALITIES: BotPersonality[] = [
